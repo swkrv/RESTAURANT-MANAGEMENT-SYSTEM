@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Restraunts </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">                    
+    </head>
+    <script>
+        var someJavaScriptVar = '{{ size }}';
+        if(someJavaScriptVar < 1){
+            alert('No Record Found!');
+            
+        }
+   
+      </script>
+    
+    <body style="height:100% ;background-color: #ffffff; ">
+        <div align="center">
+          <div align="center" class="borderr" >
+             <div class="header" >
+                <h1 class="word">Restraunts</h1>
+             </div></br>
+             <div style="height:10%">
+                <span style="width:70%" >
+                <B class="bottom"  align="left" style="float: left; margin-left: 20pc; font-size: x-large;"> Hi {{session.username}}!! Restruants Nearby you ... </B>
+            </span>
+            <span style="width:30%">
+                <a href="{{ url_for('logout') }}"  align="right" style="float:right;margin-right: 20pc;" class="btn" >Logout</a>
+            </span >
+            </div>
+            <div>
+                <form action="{{ url_for('main') }}" method="post">
+                    <label for="categories" class="dropdown" ><b>Search Category: </b> </label>
+                    <select id="categories"  class="dropdown" name="categories">
+                      <option value="name">Name</option>
+                      <option value="cuisine">Cuisne</option>
+                      <option value="address.street">Street</option>
+                      <option value="borough">Borough</option>
+                      <option value="grades.grade">Grade</option>
+                    </select>
+                    <input id="search" name="searchvalue" type="text" placeholder="Please Search here" class="textbox"/>
+                    <input type="submit" name="Search" class="btn">
+                  </form>
+            </div>
+            <diV style="height:70%">
+                <table class="table" style="overflow-y:scroll;" >
+                    <thead>
+                    <tr>
+                        {% for col in column_names %}
+                        <th>
+                        
+                          {{col}}
+                         
+                        </th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in row_data %}
+                        <tr>
+                            {% for col, row_ in zip(column_names, row) %}
+                            <td>{{row_}}</td>
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </diV>
+          </div>
+        </div>
+    </body>
+</html>
